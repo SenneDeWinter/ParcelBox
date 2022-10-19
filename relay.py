@@ -1,4 +1,3 @@
-from ast import While
 from gpiozero import OutputDevice, RGBLED
 import time
 
