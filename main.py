@@ -12,7 +12,8 @@ import de2120_barcode_scanner
 import time
 
 def main():
-    check_database()
+    read_barcode()
+    control_lock()
 
 def read_barcode():
     my_scanner = de2120_barcode_scanner.DE2120BarcodeScanner()
@@ -28,36 +29,38 @@ def read_barcode():
             print(barcode)
             scan_buffer = ""
 
+            mydb = mysql.connector.connect(
+                host = secrets.host,
+                user = secrets.user,
+                password = secrets.password,
+                database = secrets.database 
+            )
+
+            mycursor = mydb.cursor()
+
+
+            mycursor.execute("SELECT * FROM parcels WHERE barcode = %s" % (barcode))
+
+            myresult = mycursor.fetchall()
+
+            print(myresult)
+
         time.sleep(0.02)
 
-def check_database():
-    mydb = mysql.connector.connect(
-    host = secrets.host,
-    user = secrets.user,
-    password = secrets.password,
-    database = secrets.database 
-)
-
-mycursor = mydb.cursor()
-
-mycursor.execute("SELECT * FROM parcels")
-
-myresult = mycursor.fetchall()
-
-print(myresult)
 
 def control_lock():
+
     relay = OutputDevice(16)
 
-led = RGBLED(26, 19, 13)
+    led = RGBLED(26, 19, 13)
 
-while True:
-    relay.on()
-    led.color = (0,1,1)
-    time.sleep(5)
-    relay.off()
-    led.color = (1,1,0)
-    time.sleep(5) 
+    while True:
+        relay.on()
+        led.color = (0,1,1)
+        time.sleep(5)
+        relay.off()
+        led.color = (1,1,0)
+        time.sleep(5) 
 
 
 if __name__ == '__main__':
