@@ -7,4 +7,5 @@ relay = OutputDevice(16)
 while True:
     relay.on()
     time.sleep(5)
-    relay.off() 
+    relay.off()
+    time.sleep(5) 
