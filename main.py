@@ -10,7 +10,6 @@ import de2120_barcode_scanner
 
 #Other
 import time
-import json
 
 def main():
     read_barcode()
@@ -26,7 +25,7 @@ def read_barcode():
     while True:
         scan_buffer = my_scanner.read_barcode()
         if scan_buffer:
-            barcode = (scan_buffer)
+            barcode = str(scan_buffer)
             print(barcode)
             scan_buffer = ""
 
@@ -37,9 +36,9 @@ def read_barcode():
                 database = secrets.database 
             )
 
-            mycursor = mydb.cursor(dictionary=True)
+            mycursor = mydb.cursor()
 
-            mycursor.execute("SELECT barcode FROM parcels WHERE status = 'undelivered'")
+            mycursor.execute("SELECT * FROM parcels WHERE 1")
 
             myresult = mycursor.fetchall()
 
