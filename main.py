@@ -13,7 +13,6 @@ import time
 
 def main():
     read_barcode()
-    control_lock()
 
 def read_barcode():
     my_scanner = de2120_barcode_scanner.DE2120BarcodeScanner()
@@ -43,6 +42,7 @@ def read_barcode():
             myresult = mycursor.fetchall()
 
             print(myresult)
+            control_lock()
 
 
         time.sleep(0.02)
