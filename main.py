@@ -37,7 +37,7 @@ def read_barcode():
 
             mycursor = mydb.cursor()
 
-            mycursor.execute("SELECT * FROM parcels WHERE 1")
+            mycursor.execute("SELECT * FROM parcels WHERE status = 'undelivered'")
 
             myresult = mycursor.fetchall()
 
@@ -56,11 +56,10 @@ def control_lock():
 
     
     relay.on()
+
     led.color = (0,1,1)
     time.sleep(5)
     relay.off()
-    led.color = (1,1,0)
-
 
 if __name__ == '__main__':
     main()
