@@ -54,13 +54,12 @@ def control_lock():
 
     led = RGBLED(26, 19, 13)
 
-    while True:
-        relay.on()
-        led.color = (0,1,1)
-        time.sleep(5)
-        relay.off()
-        led.color = (1,1,0)
-        time.sleep(5) 
+    
+    relay.on()
+    led.color = (0,1,1)
+    time.sleep(5)
+    relay.off()
+    led.color = (1,1,0)
 
 
 if __name__ == '__main__':
