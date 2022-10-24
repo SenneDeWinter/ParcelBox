@@ -25,7 +25,6 @@ def read_barcode():
         scan_buffer = my_scanner.read_barcode()
         if scan_buffer:
             barcode = str(scan_buffer)
-            print(barcode)
             scan_buffer = ""
 
             mydb = mysql.connector.connect(
@@ -35,14 +34,19 @@ def read_barcode():
                 database = secrets.database 
             )
 
-            mycursor = mydb.cursor()
+            mycursor = mydb.cursor(dictionary=True)
 
-            mycursor.execute("SELECT * FROM parcels WHERE status = 'undelivered'")
+            mycursor.execute("SELECT barcode FROM parcels WHERE barcode LIKE '%s'AND delivery_status = 'undelivered';" % (barcode))
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
-            control_lock()
+            amount = len(myresult)
+
+            if amount >= 1:
+                control_lock()
+
+            else:
+                pass
 
 
         time.sleep(0.02)

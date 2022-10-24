@@ -8,10 +8,22 @@ mydb = mysql.connector.connect(
     database = secrets.database 
 )
 
-mycursor = mydb.cursor()
+barcode = '03STUNM137689541'
 
-mycursor.execute("SELECT * FROM parcels")
+mycursor = mydb.cursor(dictionary=True)
+
+mycursor.execute("SELECT barcode FROM parcels WHERE barcode LIKE '%s'AND delivery_status = 'undelivered';" % (barcode))
 
 myresult = mycursor.fetchall()
 
-print(myresult)
+amount = len(myresult)
+
+if amount >= 1:
+    print("sesam open u")
+
+else:
+    print("access denied")
+
+#print(aantal)
+
+#print(myresult)
