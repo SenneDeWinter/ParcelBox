@@ -12,13 +12,16 @@ import de2120_barcode_scanner
 import time
 
 def main():
-    read_barcode()
+    while True:
+        read_barcode()
+        check_db()
 
 def read_barcode():
     my_scanner = de2120_barcode_scanner.DE2120BarcodeScanner()
 
 
     scan_buffer = ""
+    global barcode
     barcode = ""
 
     while True:
@@ -26,33 +29,34 @@ def read_barcode():
         if scan_buffer:
             barcode = str(scan_buffer)
             scan_buffer = ""
-
-            print(barcode)
-
-            mydb = mysql.connector.connect(
-                host = secrets.host,
-                user = secrets.user,
-                password = secrets.password,
-                database = secrets.database 
-            )
-
-            mycursor = mydb.cursor(dictionary=True)
-
-            mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivery_status = 'undelivered';" % (barcode))
-
-            myresult = mycursor.fetchall()
-
-            amount = len(myresult)
-
-            if amount >= 1:
-                control_lock()
-
-            else:
-                pass
-
+            exit
+            return barcode
+            
 
         time.sleep(0.02)
 
+def check_db():
+    mydb = mysql.connector.connect(
+        host = secrets.host,
+        user = secrets.user,
+        password = secrets.password,
+        database = secrets.database 
+    )
+
+    mycursor = mydb.cursor(dictionary=True)
+
+    mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivery_status = 'undelivered';" % (barcode))
+
+    myresult = mycursor.fetchall()
+
+    amount = len(myresult)
+
+    if amount >= 1:
+        control_lock()
+        #add UPDATE query
+
+    else:
+        pass
 
 def control_lock():
 
