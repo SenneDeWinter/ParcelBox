@@ -38,7 +38,7 @@ def read_barcode():
 
             mycursor = mydb.cursor(dictionary=True)
 
-            mycursor.execute("SELECT barcode FROM parcels WHERE barcode = %s AND delivery_status = 'undelivered';" % (barcode))
+            mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivery_status = 'undelivered';" % (barcode))
 
             myresult = mycursor.fetchall()
 
