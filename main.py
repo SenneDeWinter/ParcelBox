@@ -44,8 +44,9 @@ def check_db():
     )
 
     mycursor = mydb.cursor(dictionary=True)
+    mycursor2 = mydb.cursor()
 
-    mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivery_status = 'undelivered';" % (barcode))
+    mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivered = 0;" % (barcode))
 
     myresult = mycursor.fetchall()
 
@@ -53,7 +54,8 @@ def check_db():
 
     if amount >= 1:
         control_lock()
-        #add UPDATE query
+        mycursor2.execute("UPDATE parcels SET delivered = 1 WHERE barcode = '%s';" % (barcode))
+        mydb.commit()
 
     else:
         pass
