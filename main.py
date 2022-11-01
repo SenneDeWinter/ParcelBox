@@ -41,7 +41,7 @@ def check_db():
         database = secrets.database 
     )
 
-    if barcode == '123456789':
+    if barcode == secrets.barcode:
         control_lock()
     
     else:
