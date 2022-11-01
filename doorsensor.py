@@ -1,9 +1,14 @@
-from gpiozero import GPIODevice
+from gpiozero import InputDevice, Buzzer
+import time
 
-doorsensor = GPIODevice(pin=21)
 
-if doorsensor.is_active:
-    print("toe")
+doorsensor = InputDevice(4)
+bz = Buzzer(17)
 
-else:
-    print("open")
+while True:
+    waarde = doorsensor.value
+    if waarde == 0:
+        bz.on()
+    
+    elif waarde == 1:
+        bz.off()
