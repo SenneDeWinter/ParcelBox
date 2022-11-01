@@ -29,9 +29,7 @@ def read_barcode():
         if scan_buffer:
             barcode = str(scan_buffer)
             scan_buffer = ""
-            exit
-            return barcode
-            
+            return      
 
         time.sleep(0.02)
 
