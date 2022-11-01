@@ -2,8 +2,8 @@
 import mysql.connector
 import secrets
 
-#Relay & RGB LED
-from gpiozero import OutputDevice, RGBLED
+#GPIOZero
+from gpiozero import OutputDevice, RGBLED, InputDevice, Buzzer
 
 #Barcode reader
 import de2120_barcode_scanner
@@ -41,22 +41,26 @@ def check_db():
         database = secrets.database 
     )
 
-    mycursor = mydb.cursor(dictionary=True)
-    mycursor2 = mydb.cursor()
-
-    mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivered = 0;" % (barcode))
-
-    myresult = mycursor.fetchall()
-
-    amount = len(myresult)
-
-    if amount >= 1:
+    if barcode == '123456789':
         control_lock()
-        mycursor2.execute("UPDATE parcels SET delivered = 1 WHERE barcode = '%s';" % (barcode))
-        mydb.commit()
-
+    
     else:
-        pass
+        mycursor = mydb.cursor(dictionary=True)
+        mycursor2 = mydb.cursor()
+
+        mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivered = 0;" % (barcode))
+
+        myresult = mycursor.fetchall()
+
+        amount = len(myresult)
+
+        if amount >= 1:
+            control_lock()
+            mycursor2.execute("UPDATE parcels SET delivered = 1 WHERE barcode = '%s';" % (barcode))
+            mydb.commit()
+
+        else:
+            pass
 
 def control_lock():
 
@@ -68,8 +72,27 @@ def control_lock():
     relay.on()
 
     led.color = (0,1,1)
+
     time.sleep(5)
+
     relay.off()
+
+    time.sleep(3)
+
+    check_door()
+
+def check_door():
+    doorsensor = InputDevice(4)
+    bz = Buzzer(17)
+
+    while True:
+        waarde = doorsensor.value
+        if waarde == 0:
+            bz.on()
+    
+        elif waarde == 1:
+            bz.off()
+            break
 
 if __name__ == '__main__':
     main()
