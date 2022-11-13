@@ -2,7 +2,7 @@ from gpiozero import InputDevice, Buzzer
 import time
 
 
-doorsensor = InputDevice(4)
+doorsensor = InputDevice(4, pullup=True)
 bz = Buzzer(17)
 
 while True:
