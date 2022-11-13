@@ -1,14 +1,14 @@
-from gpiozero import OutputDevice, RGBLED
+from gpiozero import OutputDevice, LED
 import time
 
 relay = OutputDevice(16)
 
-led = RGBLED(26, 19, 13)
+led = LED(26)
 
 while True:
     relay.on()
-    led.color = (0,1,1)
+    led.on()
     time.sleep(5)
     relay.off()
-    led.color = (1,1,0)
+    led.off()
     time.sleep(5) 
