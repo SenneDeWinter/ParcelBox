@@ -7,12 +7,14 @@ A DIY parcel locker using Raspberry Pi. The locker is connected to a MySQL datab
 - Lock-style Solenoid - 12VDC
 - Generic Green LED
 - Generic Buzzer
+- Generic Step Down Regulator
 ## Software
 - Python script that checks if the scanned barcode is known in the database, then opens the lock and updates the delivery status
 - MySQL Database
 - PHPMyAdmin
-- PHP
-- HTML Website to insert new parcels into the database
+- PHP page to insert new parcels into the database
+- PHP page to check the delivery status of parcels
 ## Other Hardware
 - Custom 3D printed RPi case
 - Custom lasercut box to house the pi and other components
+- 12V 2A Power Supply
