@@ -3,7 +3,7 @@ import mysql.connector
 import secrets
 
 #GPIOZero
-from gpiozero import OutputDevice, RGBLED, InputDevice, Buzzer
+from gpiozero import OutputDevice, LED, InputDevice, Buzzer
 
 #Barcode reader
 import de2120_barcode_scanner
@@ -66,12 +66,12 @@ def control_lock():
 
     relay = OutputDevice(16)
 
-    led = RGBLED(26, 19, 13)
+    led = LED(26)
 
     
     relay.on()
 
-    led.color = (0,1,1)
+    led.on()
 
     time.sleep(5)
 
@@ -82,7 +82,7 @@ def control_lock():
     check_door()
 
 def check_door():
-    doorsensor = InputDevice(4)
+    doorsensor = InputDevice(4, pullup=True)
     bz = Buzzer(17)
 
     while True:
