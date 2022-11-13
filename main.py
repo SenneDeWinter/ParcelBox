@@ -82,7 +82,7 @@ def control_lock():
     check_door()
 
 def check_door():
-    doorsensor = InputDevice(4, pullup=True)
+    doorsensor = InputDevice(4, pull_up=True)
     bz = Buzzer(17)
 
     while True:
