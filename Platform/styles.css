@@ -1,0 +1,33 @@
+body{
+    background: rgb(20,18,55);
+    background: linear-gradient(90deg, rgba(20,18,55,1) 0%, rgba(53,64,75,1) 40%, rgba(7,55,65,1) 100%);
+}
+div{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 22px;
+    background: #413f64;
+    box-shadow:  41px 41px 82px #201f31,
+             -41px -41px 82px #625f97;
+}
+
+p{
+    font-size: x-small;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+}

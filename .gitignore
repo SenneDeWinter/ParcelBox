@@ -1,2 +1,4 @@
 .vscode
 secrets.py
+sftp.json
+.DS_Store

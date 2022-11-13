@@ -56,7 +56,7 @@ def check_db():
 
         if amount >= 1:
             control_lock()
-            mycursor2.execute("UPDATE parcels SET delivered = 1 WHERE barcode = '%s';" % (barcode))
+            mycursor2.execute("UPDATE parcels SET delivered = 1, delivery_time = CURRENT_TIMESTAMP WHERE barcode = '%s';" % (barcode))
             mydb.commit()
 
         else:
