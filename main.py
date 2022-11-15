@@ -10,6 +10,7 @@ import de2120_barcode_scanner
 
 #Other
 import time
+import requests
 
 def main():
     while True:
@@ -82,7 +83,19 @@ def check_door():
     
         elif waarde == 1:
             bz.off()
-            break
+            if barcode != secrets.barcode:
+                send_notification()
+                break
+            
+            else:
+                break
+
+def send_notification():    
+    apiToken = secrets.api_token
+    chatID = secrets.chat_id
+    apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
+    message = f"Je pakje met barcode {barcode} werd zonet geleverd"
+    requests.post(apiURL, json={'chat_id': chatID, 'text': message})
 
 if __name__ == '__main__':
     main()
