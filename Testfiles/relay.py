@@ -1,7 +1,7 @@
 from gpiozero import OutputDevice, LED
 import time
 
-relay = OutputDevice(16)
+relay = OutputDevice(14)
 
 led = LED(26)
 
