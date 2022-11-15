@@ -18,8 +18,6 @@ def main():
 
 def read_barcode():
     my_scanner = de2120_barcode_scanner.DE2120BarcodeScanner()
-
-
     scan_buffer = ""
     global barcode
     barcode = ""
@@ -49,7 +47,6 @@ def check_db():
         mycursor2 = mydb.cursor()
 
         mycursor.execute("SELECT barcode FROM parcels WHERE barcode = '%s' AND delivered = 0;" % (barcode))
-
         myresult = mycursor.fetchall()
 
         amount = len(myresult)
@@ -63,20 +60,13 @@ def check_db():
             pass
 
 def control_lock():
-
-    relay = OutputDevice(16)
-
+    relay = OutputDevice(14)
     led = LED(26)
-
-    
+ 
     relay.on()
-
     led.on()
-
     time.sleep(5)
-
     relay.off()
-
     time.sleep(3)
 
     check_door()
