@@ -14,6 +14,7 @@ A DIY parcel locker using Raspberry Pi. The locker is connected to a MySQL datab
 - PHPMyAdmin
 - PHP page to insert new parcels into the database
 - PHP page to check the delivery status of parcels
+- PM2 to start python script on boot
 ## Other Hardware
 - Custom 3D printed RPi case
 - Custom lasercut box to house the pi and other components
