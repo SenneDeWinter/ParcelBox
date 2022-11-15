@@ -18,3 +18,6 @@ A DIY parcel locker using Raspberry Pi. The locker is connected to a MySQL datab
 - Custom 3D printed RPi case
 - Custom lasercut box to house the pi and other components
 - 12V 2A Power Supply
+
+## Schematic
+![Schematic](/Images/ParcelBox_bb.png)
