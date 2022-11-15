@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	$sql = "INSERT INTO parcels (provider_, barcode) VALUES ('$provider', '$barcode')";
 
 	if ($conn->query($sql) === TRUE) {
-    echo "<script>location.href='bevestiging.php';</script>";
+    echo "<script>location.href='bevestiging.html';</script>";
 		// echo "New record created successfully";
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
@@ -50,7 +50,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 					<br><br>
 					<input type="submit" value="Submit">
 					<br><br>
-					<p>*voeg O toe voor de barcode (PostNL)</p>
             		<a href="table.php">
                 	<p>Bekijk de leverstatus van de pakjes</p>
             		</a>
